@@ -1,12 +1,11 @@
 import Container from "@/components/shared/Container";
+import Logo from "@/components/shared/Logo";
 
 export default function Home() {
   return (
     <main>
       <Container>
-        <h1 className="py-20 text-5xl font-bold text-primary">
-          DishDash 
-        </h1>
+      <Logo />
       </Container>
     </main>
   );
