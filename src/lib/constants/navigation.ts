@@ -15,4 +15,4 @@ export const NAV_LINKS = [
       label: "About",
       href: "/about",
     },
-  ];
+  ] as const;
