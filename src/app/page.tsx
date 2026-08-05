@@ -1,13 +1,12 @@
 import Navbar from "@/components/layout/Navbar";
+import Hero from "@/features/home/Hero";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-
-      <main className="pt-32">
-        Hero
-      </main>
+      <Hero />
+      
     </>
   );
 }
