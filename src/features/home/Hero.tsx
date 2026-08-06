@@ -1,43 +1,47 @@
+import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="pt-32">
-      <div className="mx-auto flex min-h-[80vh] max-w-7xl items-center justify-between">
-     
-        <div className="max-w-xl">
-          <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-             Fast Delivery
-          </span>
+    <section className="relative overflow-hidden pt-32">
+      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
-          <h1 className="mt-6 text-6xl font-bold leading-tight">
-            Delicious Food
-            <br />
-            Delivered
-            <span className="text-primary"> Fast.</span>
-          </h1>
+      <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-orange-300/20 blur-3xl" />
+      <Container>
+        <div className="grid min-h-[85vh] items-center gap-16 lg:grid-cols-2">
+          <div>
+            <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+              fast delivery in Your City
+            </span>
 
-          <p className="mt-6 text-lg text-muted-foreground">
-            Discover the best restaurants near you and order your favorite meals
-            in minutes.
-          </p>
+            <h1 className="mt-6 text-5xl font-bold leading-tight lg:text-7xl">
+              Delicious Food
+              <br />
+              delivered
+              <span className="text-primary"> Fast.</span>
+            </h1>
 
-          <div className="mt-8 flex gap-4">
-            <Button size="lg" className="rounded-full px-8">
-              Order Now
-            </Button>
+            <p className="mt-6 max-w-lg text-lg text-muted-foreground">
+              Order from your favorite restaurants with fast delivery and
+              exclusive daily offers.
+            </p>
 
-            <Button variant="outline" size="lg" className="rounded-full px-8">
-              View Menu
-            </Button>
+            <div className="mt-8 flex gap-4">
+              <Button size="lg" className="rounded-full px-8">
+                Order Now
+              </Button>
+
+              <Button variant="outline" size="lg" className="rounded-full px-8">
+                View Menu
+              </Button>
+            </div>
+          </div>
+
+          <div className="relative flex justify-center">
+            <div className="flex h-[520px] w-[520px] items-center justify-center rounded-full bg-primary/10"></div>
           </div>
         </div>
-
-       
-        <div className="flex h-[550px] w-[550px] items-center justify-center rounded-full bg-primary/10">
-         image 
-        </div>
-      </div>
+      </Container>
     </section>
   );
 }
