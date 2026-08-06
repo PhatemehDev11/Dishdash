@@ -1,31 +1,73 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { motion } from "framer-motion";
 import { FaMotorcycle } from "react-icons/fa6";
+import { Star } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 export default function HeroContent() {
   return (
-    <div className="text-center lg:text-left">
-      <div className="inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 shadow-sm">
+    <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+ 
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="hidden  md:inline-flex items-center gap-2 rounded-full border bg-background/80 px-4 py-2 shadow-md backdrop-blur-md"
+      >
         <FaMotorcycle className="text-primary" />
 
-        <span className="text-sm font-medium">Fast Delivery in Your City</span>
-      </div>
+        <span className="text-sm font-medium">
+          Fast Delivery in Your City
+        </span>
+      </motion.div>
 
-      <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-7xl">
+    
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.15,
+        }}
+        className="mt-7 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-7xl"
+      >
         Delicious Food
         <br />
-        Delivered
+
+        <span>Delivered</span>
+
         <span className="text-primary"> Fast.</span>
-      </h1>
+      </motion.h1>
 
-      <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-muted-foreground lg:mx-0 lg:text-lg">
+      {/* Paragraph */}
+      <motion.p
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.3,
+        }}
+        className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg w-[25rem]  md:w-auto"
+      >
         Order from your favorite restaurants with fast delivery and exclusive
-        daily offers.
-      </p>
+        daily offers. Fresh food, fast delivery and an unforgettable experience.
+      </motion.p>
 
-      <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+   
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.45,
+        }}
+        className="mt-10 flex   gap-4 w-auto sm:flex-row"
+      >
         <Button
           size="lg"
-          className="rounded-full px-8  hover:scale-105 transition-all duration-300"
+          className="rounded-full px-8 transition-all duration-300 hover:scale-105"
         >
           Order Now
         </Button>
@@ -33,11 +75,36 @@ export default function HeroContent() {
         <Button
           variant="outline"
           size="lg"
-          className="rounded-full px-8  hover:scale-105 transition-all duration-300"
+          className="rounded-full px-8 transition-all duration-300 hover:scale-105"
         >
           View Menu
         </Button>
-      </div>
+      </motion.div>
+
+
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.6,
+        }}
+        className="mt-8 flex items-center gap-3"
+      >
+        <div className="flex">
+          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+        </div>
+
+        <span className="font-semibold">4.9</span>
+
+        <span className="text-sm text-muted-foreground">
+          from 12k+ happy customers
+        </span>
+      </motion.div>
     </div>
   );
 }
