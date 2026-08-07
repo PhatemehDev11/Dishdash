@@ -21,7 +21,7 @@ export default function HeroImage() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute h-[280px] w-[280px] rounded-full bg-primary/30 blur-[70px] sm:h-[400px] sm:w-[400px] lg:h-[520px] lg:w-[520px]"
+        className="absolute h-[280px] w-[280px] rounded-full bg-primary/30 blur-[70px] sm:h-[400px] sm:w-[400px] lg:h-[520px] w-[240px] sm:w-[350px] lg:w-[520px]"
       />
 
       <motion.div
@@ -92,7 +92,6 @@ export default function HeroImage() {
           </div>
         </FloatCard>
 
-        {/* Restaurant Card */}
         <FloatCard
           delay={1.4}
           className=" hidden lg:flex right-0 top-1/2 -translate-y-1/2 px-4 py-3"
