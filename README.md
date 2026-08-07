@@ -1,4 +1,4 @@
-🍽️ DishDash
+ DishDash
 
 A modern full-stack food ordering platform built with:
 
