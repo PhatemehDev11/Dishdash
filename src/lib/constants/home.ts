@@ -35,34 +35,33 @@ import {
   ];
 
 
-
 export const POPULAR_DISHES = [
   {
     category: "ITALIAN",
     name: "Spicy Arrabbiata",
     price: "$18.00",
-    image: "",
+    image: "/Foods/SpicyArrabiate.png",
     color: "bg-rose-100",
   },
   {
     category: "MEDITERRANEAN",
     name: "Falafel Wrap",
     price: "$14.50",
-    image: "",
+    image: "/Foods/FalafelWrap.png",
     color: "bg-emerald-100",
   },
   {
     category: "THAI",
     name: "Yellow Curry Bowl",
     price: "$16.00",
-    image: "",
+    image: "/Foods/YellowCurryBowl.png",
     color: "bg-yellow-100",
   },
   {
     category: "JAPANESE",
     name: "Salmon Nigiri Set",
     price: "$23.00",
-    image: "",
+    image: "/Foods/SalmonNigiriSet.png",
     color: "bg-blue-100",
   },
 ];

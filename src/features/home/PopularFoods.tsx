@@ -1,6 +1,7 @@
 import { POPULAR_DISHES } from "@/lib/constants/home";
 import DishCard from "./DishCard";
 
+
 export default function PopularFoods() {
   return (
     <section className="py-20">
