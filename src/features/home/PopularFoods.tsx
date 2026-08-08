@@ -1,28 +1,17 @@
 import { POPULAR_DISHES } from "@/lib/constants/home";
 import DishCard from "./DishCard";
-
+import { SectionHead } from "@/components/shared/SectionHead";
 
 export default function PopularFoods() {
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHead
+          eyebrow="Popular"
+          title=" Popular Dishes"
+          description="  Crowd favorites, picked by thousands of hungry customers this week."
+        />
 
-    
-        <div className="text-center">
-          <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
-            Popular
-          </span>
-
-          <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-            Popular Dishes
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Crowd favorites, picked by thousands of hungry customers this week.
-          </p>
-        </div>
-
-       
         <div
           className=" mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide
             sm:grid sm:grid-cols-2 sm:overflow-visible
@@ -42,7 +31,6 @@ export default function PopularFoods() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

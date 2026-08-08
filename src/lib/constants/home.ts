@@ -1,39 +1,38 @@
 import {
-    Pizza,
-    Beef,
-    CakeSlice,
-    Coffee,
-    Salad,
-    IceCreamBowl,
-  } from "lucide-react";
-  
-  export const CATEGORIES = [
-    {
-      title: "Pizza",
-      icon: Pizza,
-    },
-    {
-      title: "Burgers",
-      icon: Beef,
-    },
-    {
-      title: "Desserts",
-      icon: CakeSlice,
-    },
-    {
-      title: "Drinks",
-      icon: Coffee,
-    },
-    {
-      title: "Healthy",
-      icon: Salad,
-    },
-    {
-      title: "Ice Cream",
-      icon: IceCreamBowl,
-    },
-  ];
+  Pizza,
+  Beef,
+  CakeSlice,
+  Coffee,
+  Salad,
+  IceCreamBowl,
+} from "lucide-react";
 
+export const CATEGORIES = [
+  {
+    title: "Pizza",
+    icon: Pizza,
+  },
+  {
+    title: "Burgers",
+    icon: Beef,
+  },
+  {
+    title: "Desserts",
+    icon: CakeSlice,
+  },
+  {
+    title: "Drinks",
+    icon: Coffee,
+  },
+  {
+    title: "Healthy",
+    icon: Salad,
+  },
+  {
+    title: "Ice Cream",
+    icon: IceCreamBowl,
+  },
+];
 
 export const POPULAR_DISHES = [
   {
@@ -66,8 +65,6 @@ export const POPULAR_DISHES = [
   },
 ];
 
-
-
 export const WHY_CHOOSE_US = [
   {
     title: "Fast Delivery",
@@ -91,4 +88,63 @@ export const WHY_CHOOSE_US = [
   },
 ] as const;
 
+export const STEP = [
+  {
+    id: "choose",
+    number: 1,
+    title: "Choose Restaurant",
+    description: "Browse nearby kitchens and cuisines.",
+    color: "bg-secondary",
+  },
+  {
+    id: "select",
+    number: 2,
+    title: "Select Food",
+    description: "Build your order from the full menu.",
+    color: "bg-primary",
+  },
+  {
+    id: "checkout",
+    number: 3,
+    title: "Checkout",
+    description: "Pay securely in just a few taps.",
+    color: "bg-accent",
+  },
+  {
+    id: "enjoy",
+    number: 4,
+    title: "Enjoy Meal",
+    description: "Track your rider and dig in.",
+    color: "bg-danger",
+  },
+];
 
+export const TESTIMONIAL = [
+  {
+    id: "rana",
+    name: "Rana K.",
+    rating: 5,
+    comment:
+      "Delivery was faster than the app even estimated, and the food arrived still hot. Genuinely impressed.",
+    avatarInitial: "R",
+    avatarColor: "#F87171",
+  },
+  {
+    id: "milad",
+    name: "Milad T.",
+    rating: 5,
+    comment:
+      "The restaurant selection is huge and the app makes reordering my favorites effortless.",
+    avatarInitial: "M",
+    avatarColor: "#60A5FA",
+  },
+  {
+    id: "sara",
+    name: "Sara P.",
+    rating: 4,
+    comment:
+      "Great deals every week. Customer support fixed an issue with my order in minutes.",
+    avatarInitial: "S",
+    avatarColor: "#FBBF24",
+  },
+];

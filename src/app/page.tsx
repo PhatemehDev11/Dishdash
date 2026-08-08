@@ -4,6 +4,8 @@ import Categories from "@/features/home/Categories";
 import PopularFoods from "@/features/home/PopularFoods";
 import WhyChooseUs from "@/features/home/WhyChooseUs";
 import Deals from "@/features/home/Deals";
+import { HowItWorks } from "@/features/home/HowItWorks";
+import { Testimonials } from "@/features/home/Testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <PopularFoods/>
       <WhyChooseUs/>
       <Deals />
+      <HowItWorks/>
+      <Testimonials/>
     </>
   );
 }

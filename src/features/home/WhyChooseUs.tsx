@@ -1,6 +1,7 @@
 import { Clock3, Leaf, CreditCard, Star } from "lucide-react";
 import { WHY_CHOOSE_US } from "@/lib/constants/home";
 import Container from "@/components/shared/Container";
+import { SectionHead } from "@/components/shared/SectionHead";
 
 const ICONS = {
   delivery: Clock3,
@@ -13,23 +14,14 @@ export default function WhyChooseUs() {
   return (
     <section className="py-24">
       <Container>
-        <div className="text-center">
-          <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
-            Why DishDash
-          </span>
-
-          <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-            Why Choose Us
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Everything you need for a smooth, reliable food ordering
-            experience.
-          </p>
-        </div>
+        <SectionHead
+          eyebrow=" Why DishDash"
+          title=" Why Choose Us"
+          description=" Everything you need for a smooth, reliable food ordering experience."
+          />
         <div
           className="
-            mt-12 flex gap-5 overflow-x-auto pb-4
+           mt-12 flex gap-5 overflow-x-auto pb-4
             snap-x snap-mandatory scrollbar-hide
             sm:grid sm:grid-cols-2 sm:overflow-visible
             lg:grid-cols-4
@@ -54,9 +46,7 @@ export default function WhyChooseUs() {
                   <Icon className="h-7 w-7 text-primary" />
                 </div>
 
-                <h3 className="mt-6 text-xl font-bold">
-                  {feature.title}
-                </h3>
+                <h3 className="mt-6 text-xl font-bold">{feature.title}</h3>
 
                 <p className="mt-3 leading-7 text-muted-foreground">
                   {feature.description}

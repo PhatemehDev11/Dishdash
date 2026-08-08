@@ -3,27 +3,18 @@
 import { motion } from "framer-motion";
 
 import { CATEGORIES } from "@/lib/constants/home";
+import { SectionHead } from "@/components/shared/SectionHead";
 
 export default function Categories() {
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        <div className="mb-10 text-center">
-        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary">
-        Categories
-          </span>
-          
-
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            What are you craving?
-          </h2>
-
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Explore your favorite food categories and discover something
-            delicious.
-          </p>
-        </div>
+        <SectionHead
+          eyebrow="Categories"
+          title=" What are you craving?"
+          description=" Explore your favorite food categories and discover something
+            delicious."
+        />
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {CATEGORIES.map((category, index) => {
@@ -53,7 +44,6 @@ export default function Categories() {
             );
           })}
         </div>
-
       </div>
     </section>
   );
