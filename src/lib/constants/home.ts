@@ -65,3 +65,28 @@ export const POPULAR_DISHES = [
     color: "bg-blue-100",
   },
 ];
+
+
+
+export const WHY_CHOOSE_US = [
+  {
+    title: "Fast Delivery",
+    description: "Hot food, delivered in 30 minutes or less, every time.",
+    icon: "delivery",
+  },
+  {
+    title: "Fresh Ingredients",
+    description: "Partner kitchens sourced daily for quality you can taste.",
+    icon: "fresh",
+  },
+  {
+    title: "Secure Payment",
+    description: "Encrypted checkout with every major card and wallet.",
+    icon: "payment",
+  },
+  {
+    title: "Top Rated Restaurants",
+    description: "Only kitchens with 4.5+ ratings make it onto Devour.",
+    icon: "rating",
+  },
+] as const;

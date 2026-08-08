@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/features/home/Hero/Hero";
 import Categories from "@/features/home/Categories";
 import PopularFoods from "@/features/home/PopularFoods";
+import WhyChooseUs from "@/features/home/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Categories/>
       <PopularFoods/>
+      <WhyChooseUs/>
     </>
   );
 }
