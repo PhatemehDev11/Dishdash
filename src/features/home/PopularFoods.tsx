@@ -17,7 +17,7 @@ export default function PopularFoods() {
             sm:grid sm:grid-cols-2 sm:overflow-visible
             lg:grid-cols-4
           "
-        >
+          >
           {POPULAR_DISHES.map((dish) => (
             <div
               key={dish.name}

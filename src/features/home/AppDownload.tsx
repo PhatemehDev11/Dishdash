@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/shared/Reveal";
-import {  UtensilsCrossed } from "lucide-react";
+import {  Apple, UtensilsCrossed } from "lucide-react";
 import { Play } from "lucide-react";
 
 
@@ -36,7 +36,9 @@ export function AppDownload() {
               href="#"
               className="flex items-center gap-2.5 bg-secondary text-white px-5 py-3 rounded-2xl text-[13px] transition-transform hover:-translate-y-1"
             >
-              <span className="text-xl">🍎</span>
+              <span className="text-xl">
+                <Apple/>
+              </span>
               <span>
                 <small className="block text-[9.5px] text-white/60">Download on the</small>
                 <b className="text-sm">App Store</b>

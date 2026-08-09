@@ -22,16 +22,20 @@ export function Newsletter() {
                 Weekly offers and new restaurant drops, straight to your inbox.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="flex gap-2.5 flex-none">
+            <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2.5 sm:flex-row sm:w-auto">
               <input
                 type="email"
                 required
                 placeholder="you@email.com"
-                className="px-5 py-3.5 rounded-full border-[1.5px] border-[#EEF0F2] text-sm w-[260px] outline-none focus:border-primary transition-colors"
+                className="w-full sm:w-[260px] rounded-full border-[1.5px] border-[#EEF0F2] 
+                px-5 py-3.5 text-sm outline-none transition-colors focus:border-primary
+              "
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center font-semibold text-[14.5px] px-7 py-[15px] rounded-full bg-primary text-white shadow-[0_10px_24px_rgba(34,197,94,0.35)] hover:bg-primary-dark transition-all active:scale-[0.97]"
+                className=" w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-primary px-7 py-[15px] 
+                text-[14.5px] font-semibold text-white shadow-[0_10px_24px_rgba(34,197,94,0.35)] transition-all hover:-translate-y-0.5  hover:bg-primary-dark active:scale-[0.97]
+              "
               >
                 {subscribed ? "Subscribed ✓" : "Subscribe"}
               </button>

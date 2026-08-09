@@ -44,10 +44,10 @@ import {
       <footer className="bg-foreground text-muted-foreground">
         <div className="mx-auto max-w-[1240px] px-6 py-14 md:px-8">
   
-          {/* Main Footer */}
+ 
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
   
-            {/* Brand */}
+   
             <div className="max-w-sm">
               <div className="mb-4 text-2xl font-bold text-white">
                 Dish<span className="text-primary">Dash</span>
@@ -59,7 +59,6 @@ import {
               </p>
             </div>
   
-            {/* Footer Columns */}
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h5 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white">
@@ -82,7 +81,6 @@ import {
             ))}
           </div>
   
-          {/* Bottom */}
           <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-[12.5px]">
   
             <span>

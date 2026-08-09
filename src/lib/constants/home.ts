@@ -83,7 +83,7 @@ export const WHY_CHOOSE_US = [
   },
   {
     title: "Top Rated Restaurants",
-    description: "Only kitchens with 4.5+ ratings make it onto Devour.",
+    description: "Only kitchens with 4.5+ ratings make it onto Dishdash.",
     icon: "rating",
   },
 ] as const;
