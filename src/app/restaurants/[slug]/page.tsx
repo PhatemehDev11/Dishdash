@@ -3,7 +3,10 @@ import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { RestaurantHeader } from "@/features/restaurant/RestaurantHeader";
 import { MenuSection } from "@/features/restaurant/MenuSection";
-import { getRestaurantBySlug, getAllRestaurantSlugs } from "@/lib/constants/restuarant";
+import {
+  getRestaurantBySlug,
+  getAllRestaurantSlugs,
+} from "@/lib/constants/restaurant";
 
 export function generateStaticParams() {
   return getAllRestaurantSlugs().map((slug) => ({ slug }));

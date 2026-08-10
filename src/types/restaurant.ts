@@ -7,6 +7,9 @@ export interface MenuItem {
   category: string;
   gradientFrom: string;
   gradientTo: string;
+  rating: number;
+  reviewCount: number;
+  ingredients: string[];
 }
 
 export interface OpeningHours {

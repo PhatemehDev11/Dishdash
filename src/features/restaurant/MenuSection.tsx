@@ -6,6 +6,7 @@ import { Heart, Plus } from "lucide-react";
 import type { RestaurantDetail, MenuItem } from "@/types/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
+import Link from "next/link";
 
 export function MenuSection({ restaurant }: { restaurant: RestaurantDetail }) {
   const [activeCategory, setActiveCategory] = useState(restaurant.categories[0]);
@@ -57,7 +58,8 @@ function MenuCard({ item }: { item: MenuItem }) {
   const Icon = getFoodIcon(item.icon);
 
   return (
-    <div className="group bg-white rounded-3xl border border-[#EEF0F2] overflow-hidden flex gap-0 transition-all duration-300 hover:shadow-[0_12px_32px_rgba(17,24,39,0.08)] hover:-translate-y-1">
+   
+    <Link href={`/food/${item.id}`} className="group bg-white rounded-3xl border border-[#EEF0F2] overflow-hidden flex gap-0 transition-all duration-300 hover:shadow-[0_12px_32px_rgba(17,24,39,0.08)] hover:-translate-y-1">
       <div
         className="relative w-[110px] flex-none flex items-center justify-center"
         style={{ background: `linear-gradient(150deg, ${item.gradientFrom}, ${item.gradientTo})` }}
@@ -94,6 +96,6 @@ function MenuCard({ item }: { item: MenuItem }) {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
