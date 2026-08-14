@@ -1,8 +1,8 @@
 import Container from "@/components/shared/Container";
 import Logo from "@/components/shared/Logo";
-
 import NavActions from "./NavActions";
 import NavLinks from "./NavLinks";
+
 
 export default function Navbar() {
   return (

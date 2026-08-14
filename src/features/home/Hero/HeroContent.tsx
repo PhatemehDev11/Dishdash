@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 export default function HeroContent() {
   return (
     <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
- 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,12 +17,9 @@ export default function HeroContent() {
       >
         <FaMotorcycle className="text-primary" />
 
-        <span className="text-sm font-medium">
-          Fast Delivery in Your City
-        </span>
+        <span className="text-sm font-medium">Fast Delivery in Your City</span>
       </motion.div>
 
-    
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -35,9 +31,7 @@ export default function HeroContent() {
       >
         Delicious Food
         <br />
-
         <span>Delivered</span>
-
         <span className="text-primary"> Fast.</span>
       </motion.h1>
 
@@ -55,7 +49,6 @@ export default function HeroContent() {
         daily offers. Fresh food, fast delivery and an unforgettable experience.
       </motion.p>
 
-   
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,7 +73,6 @@ export default function HeroContent() {
           View Menu
         </Button>
       </motion.div>
-
 
       <motion.div
         initial={{ opacity: 0, y: 25 }}

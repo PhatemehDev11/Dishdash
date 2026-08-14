@@ -8,6 +8,7 @@ import type { MenuItem, RestaurantDetail } from "@/types/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { getFoodIcon } from "@/lib/icons";
+import { useCartStore } from "@/lib/store/Cart";
 
 export function FoodDetails({
   item,
@@ -18,10 +19,24 @@ export function FoodDetails({
 }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  
+  const addItem = useCartStore((s) => s.addItem);
+
   const Icon = getFoodIcon(item.icon);
 
   function handleAddToCart() {
+    addItem(
+      {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        icon: item.icon,
+        gradientFrom: item.gradientFrom,
+        gradientTo: item.gradientTo,
+        restaurantSlug: restaurant.slug,
+        restaurantName: restaurant.name,
+      },
+      quantity
+    );
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   }
@@ -64,14 +79,18 @@ export function FoodDetails({
                   <Star
                     key={i}
                     className={`w-4 h-4 ${
-                      i < Math.round(item.rating) ? "fill-accent text-accent" : "text-[#E5E7EB]"
+                      i < Math.round(item.rating)
+                        ? "fill-accent text-accent"
+                        : "text-[#E5E7EB]"
                     }`}
                     strokeWidth={0}
                   />
                 ))}
               </div>
               <b className="text-[14.5px]">{item.rating}</b>
-              <span className="text-muted-foreground text-sm">({item.reviewCount} reviews)</span>
+              <span className="text-muted-foreground text-sm">
+                ({item.reviewCount} reviews)
+              </span>
             </div>
 
             <p className="text-muted-foreground text-[15px] leading-[1.7] mb-5 max-w-[48ch]">
@@ -79,7 +98,7 @@ export function FoodDetails({
             </p>
 
             <div className="mb-6">
-              <h3 className="text-[13px] font-bold uppercase tracking-wider text-muted-foreground-2 mb-2.5">
+              <h3 className="text-[13px] font-bold uppercase tracking-wider text-muted-foreground mb-2.5">
                 Ingredients
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -118,7 +137,9 @@ export function FoodDetails({
                   >
                     <Minus className="w-4 h-4" strokeWidth={2.5} />
                   </button>
-                  <span className="w-5 text-center font-semibold text-[14.5px]">{quantity}</span>
+                  <span className="w-5 text-center font-semibold text-[14.5px]">
+                    {quantity}
+                  </span>
                   <button
                     aria-label="Increase quantity"
                     onClick={() => setQuantity((q) => q + 1)}
