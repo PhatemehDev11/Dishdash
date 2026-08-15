@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  ON_THE_WAY
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+
+  addresses Address[]
+  orders    Order[]
+  reviews   Review[]
+  favorites Favorite[]
+  cartItems CartItem[]
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  label     String
+  street    String
+  city      String
+  details   String?
+  isDefault Boolean @default(false)
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+}
+
+model Restaurant {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  name          String
+  icon          String
+  coverFrom     String
+  coverTo       String
+  rating        Float   @default(0)
+  reviewCount   Int     @default(0)
+  deliveryTime  String
+  distance      String
+  deliveryFee   String
+  isOpen        Boolean @default(true)
+  address       String
+  description   String
+  createdAt     DateTime @default(now())
+
+  menu          Food[]
+  openingHours  OpeningHour[]
+}
+
+model OpeningHour {
+  id           String @id @default(cuid())
+  restaurantId String
+  day          String
+  hours        String
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+}
+
+model Food {
+  id           String   @id @default(cuid())
+  restaurantId String
+  name         String
+  description  String
+  price        Float
+  icon         String
+  category     String
+  gradientFrom String
+  gradientTo   String
+  rating       Float    @default(0)
+  reviewCount  Int      @default(0)
+  ingredients  String[]
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+  reviews    Review[]
+  favorites  Favorite[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  foodId    String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  food Food @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, foodId])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  userId       String
+  addressId    String
+  status       OrderStatus @default(PENDING)
+  subtotal     Float
+  deliveryFee  Float
+  total        Float
+  createdAt    DateTime    @default(now())
+
+  user    User        @relation(fields: [userId], references: [id])
+  address Address     @relation(fields: [addressId], references: [id])
+  items   OrderItem[]
+}
+
+model OrderItem {
+  id       String @id @default(cuid())
+  orderId  String
+  foodId   String
+  name     String
+  price    Float
+  quantity Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  food  Food  @relation(fields: [foodId], references: [id])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  foodId    String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  food Food @relation(fields: [foodId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  foodId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  food Food @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, foodId])
+}
