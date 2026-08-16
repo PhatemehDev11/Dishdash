@@ -43,6 +43,7 @@ export function CartSummary() {
 
       <Button
         render={<Link href="/checkout"/>}
+        nativeButton={false}
         className={`w-full justify-center ${
           items.length === 0 ? "pointer-events-none opacity-40" : ""
         }`}

@@ -63,6 +63,7 @@ export default function HeroContent() {
           size="lg"
           className="rounded-full px-8 transition-all duration-300 hover:scale-105"
           render={<Link href="/restaurants" />}
+          nativeButton={false}
         >
           Order Now
         </Button>
@@ -72,6 +73,7 @@ export default function HeroContent() {
           size="lg"
           className="rounded-full px-8 transition-all duration-300 hover:scale-105"
           render={<a href="#popular-dishes" />}
+          nativeButton={false}
         >
           View Menu
         </Button>

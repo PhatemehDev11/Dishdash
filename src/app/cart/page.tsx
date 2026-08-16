@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
+import  Navbar  from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/store/Cart";
@@ -34,7 +34,9 @@ export default function CartPage() {
                 Looks like you haven&apos;t added anything yet. Browse
                 restaurants and find something delicious.
               </p>
-              <Button render={<Link href="/restaurants" />}>Browse Restaurants</Button>
+              <Button render={<Link href="/restaurants" />} nativeButton={false}>
+                Browse Restaurants
+              </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-8 items-start">
