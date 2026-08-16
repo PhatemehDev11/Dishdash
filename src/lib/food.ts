@@ -1,24 +1,34 @@
-import { restaurantDetails } from "@/lib/constants/restaurant";
-import type { MenuItem, RestaurantDetail } from "@/types/restaurant";
+import { prisma } from "@/lib/prisma";
 
-export interface FoodLookupResult {
-  item: MenuItem;
-  restaurant: RestaurantDetail;
-}
 
-export function getFoodItemById(id: string): FoodLookupResult | null {
-  for (const restaurant of Object.values(restaurantDetails)) {
-    const item = restaurant.menu.find((m) => m.id === id);
-    if (item) return { item, restaurant };
-  }
-  return null;
-}
+export async function getFoodById(id: string) {
+  const foodWithRestaurant = await prisma.food.findUnique({
+    where: { id },
+    include: { restaurant: true },
+  });
 
-export function getAllFoodItemIds(): string[] {
-  return Object.values(restaurantDetails).flatMap((r) => r.menu.map((m) => m.id));
+  if (!foodWithRestaurant) return null;
+
+  const { restaurant, ...item } = foodWithRestaurant;
+  return { item, restaurant };
 }
 
 
-export function getRelatedItems(restaurant: RestaurantDetail, excludeId: string, limit = 3) {
-  return restaurant.menu.filter((m) => m.id !== excludeId).slice(0, limit);
+export async function getRelatedFood(restaurantId: string, excludeId: string, limit = 3) {
+  return prisma.food.findMany({
+    where: { restaurantId, NOT: { id: excludeId } },
+    take: limit,
+  });
 }
+
+
+export async function getPopularFood(limit = 4) {
+  return prisma.food.findMany({
+    orderBy: [{ rating: "desc" }, { reviewCount: "desc" }],
+    take: limit,
+  });
+}
+
+export type FoodLookupResult = NonNullable<Awaited<ReturnType<typeof getFoodById>>>;
+export type FoodItem = FoodLookupResult["item"];
+export type FoodRestaurant = FoodLookupResult["restaurant"];
