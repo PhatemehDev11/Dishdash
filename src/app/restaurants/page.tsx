@@ -2,8 +2,11 @@ import  Navbar  from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { RestaurantsGrid } from "@/features/restaurant/RestaurantsGrid";
 import { SectionHead } from "@/components/shared/SectionHead";
-
-export default function RestaurantsListPage() {
+import { getAllRestaurants } from "@/lib/restaurant";
+ 
+export default async function RestaurantsListPage() {
+  const restaurants = await getAllRestaurants();
+ 
   return (
     <>
       <Navbar />
@@ -15,7 +18,7 @@ export default function RestaurantsListPage() {
               title="Find Your Next Meal"
               description="Browse every restaurant on DishDash and order in a few taps."
             />
-            <RestaurantsGrid />
+            <RestaurantsGrid restaurants={restaurants} />
           </div>
         </section>
       </main>
@@ -23,3 +26,4 @@ export default function RestaurantsListPage() {
     </>
   );
 }
+ 

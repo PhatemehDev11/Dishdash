@@ -3,12 +3,12 @@
 
 import { useState } from "react";
 import { Heart, Plus } from "lucide-react";
-import type { RestaurantDetail, MenuItem } from "@/types/restaurant";
+import type { RestaurantWithMenu, MenuFoodItem } from "@/lib/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
 import Link from "next/link";
 
-export function MenuSection({ restaurant }: { restaurant: RestaurantDetail }) {
+export function MenuSection({ restaurant }: { restaurant:RestaurantWithMenu }) {
   const [activeCategory, setActiveCategory] = useState(restaurant.categories[0]);
 
   const filteredMenu =
@@ -53,7 +53,7 @@ export function MenuSection({ restaurant }: { restaurant: RestaurantDetail }) {
   );
 }
 
-function MenuCard({ item }: { item: MenuItem }) {
+function MenuCard({ item }: { item: MenuFoodItem }) {
   const [liked, setLiked] = useState(false);
   const Icon = getFoodIcon(item.icon);
 

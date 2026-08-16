@@ -1,29 +1,22 @@
 import { notFound } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
+import  Navbar  from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { RestaurantHeader } from "@/features/restaurant/RestaurantHeader";
 import { MenuSection } from "@/features/restaurant/MenuSection";
-import {
-  getRestaurantBySlug,
-  getAllRestaurantSlugs,
-} from "@/lib/constants/restaurant";
-
-export function generateStaticParams() {
-  return getAllRestaurantSlugs().map((slug) => ({ slug }));
-}
-
+import { getRestaurantBySlug } from "@/lib/restaurant";
+ 
 export default async function RestaurantPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const restaurant = getRestaurantBySlug(slug);
-
+  const restaurant = await getRestaurantBySlug(slug);
+ 
   if (!restaurant) {
     notFound();
   }
-
+ 
   return (
     <>
       <Navbar />
@@ -35,3 +28,4 @@ export default async function RestaurantPage({
     </>
   );
 }
+ 
