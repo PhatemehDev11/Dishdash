@@ -20,8 +20,8 @@ export default async function FoodPage({ params }: { params: Promise<{ id: strin
     <>
       <Navbar />
       <main>
-        <FoodDetails item={item} restaurant={restaurant} />
-        <RelatedItems items={related} restaurant={restaurant} />
+      <FoodDetails item={item} restaurant={restaurant} />
+     <RelatedItems items={related} restaurant={restaurant} />
       </main>
       <Footer />
     </>

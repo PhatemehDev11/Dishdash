@@ -4,7 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Star, Minus, Plus, ChevronLeft } from "lucide-react";
-import type { MenuItem, RestaurantDetail } from "@/types/restaurant";
+import type { FoodItem, FoodRestaurant } from "@/lib/food";
 import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { getFoodIcon } from "@/lib/icons";
@@ -14,8 +14,8 @@ export function FoodDetails({
   item,
   restaurant,
 }: {
-  item: MenuItem;
-  restaurant: RestaurantDetail;
+  item: FoodItem;
+  restaurant: FoodRestaurant;
 }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);

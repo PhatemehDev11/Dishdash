@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
-import type { MenuItem, RestaurantDetail } from "@/types/restaurant";
+import type { FoodItem, FoodRestaurant } from "@/lib/food";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
 
@@ -8,8 +8,8 @@ export function RelatedItems({
   items,
   restaurant,
 }: {
-  items: MenuItem[];
-  restaurant: RestaurantDetail;
+  items: FoodItem[];
+  restaurant: FoodRestaurant;
 }) {
   if (items.length === 0) return null;
 
@@ -22,8 +22,8 @@ export function RelatedItems({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5.5">
           {items.map((item, i) => {
-           
             const Icon = getFoodIcon(item.icon);
+
             return (
               <Reveal key={item.id} delay={i * 0.06}>
                 <Link
@@ -36,16 +36,27 @@ export function RelatedItems({
                       background: `linear-gradient(150deg, ${item.gradientFrom}, ${item.gradientTo})`,
                     }}
                   >
-                    <Icon className="w-10 h-10 text-secondary/70" strokeWidth={1.3} />
+                    <Icon
+                      className="w-10 h-10 text-secondary/70"
+                      strokeWidth={1.3}
+                    />
                   </div>
+
                   <div className="px-4 pt-3.5 pb-4">
-                    <h4 className="text-[14.5px] font-semibold mb-1.5">{item.name}</h4>
+                    <h4 className="text-[14.5px] font-semibold mb-1.5">
+                      {item.name}
+                    </h4>
+
                     <div className="flex items-center justify-between">
                       <span className="text-danger font-extrabold text-[14px]">
                         ${item.price.toFixed(2)}
                       </span>
+
                       <span className="flex items-center gap-1 text-[12.5px] font-semibold">
-                        <Star className="w-3.5 h-3.5 fill-accent text-accent" strokeWidth={0} />
+                        <Star
+                          className="w-3.5 h-3.5 fill-accent text-accent"
+                          strokeWidth={0}
+                        />
                         {item.rating}
                       </span>
                     </div>

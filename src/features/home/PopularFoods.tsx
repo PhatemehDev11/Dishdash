@@ -14,6 +14,8 @@ export default async function PopularFoods() {
           description="  Crowd favorites, picked by thousands of hungry customers this week."
         />
 
+
+
         <div
           className=" mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide
             sm:grid sm:grid-cols-2 sm:overflow-visible
