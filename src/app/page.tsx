@@ -9,6 +9,7 @@ import { Testimonials } from "@/features/home/Testimonials";
 import { AppDownload } from "@/features/home/AppDownload";
 import { Newsletter } from "@/features/home/NewsLetter";
 import { Footer } from "@/components/layout/Footer";
+import FeaturedRestaurants from "@/features/home/FeaturedRestaurants";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <main> 
         <Hero />
       <Categories/>
+      <FeaturedRestaurants/>
       <PopularFoods/>
       <WhyChooseUs/>
       <Deals />

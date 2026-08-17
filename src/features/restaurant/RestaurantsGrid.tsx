@@ -15,7 +15,6 @@ export function RestaurantsGrid({ restaurants }: { restaurants: RestaurantListIt
               href={`/restaurants/${r.slug}`}
               className="group block bg-white rounded-3xl overflow-hidden border border-[#EEF0F2] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(17,24,39,0.14)]"
             >
-              {/* Outer wrapper clips the scaling background so nothing overflows the rounded corners */}
               <div className="relative h-[170px] overflow-hidden">
                 <div
                   className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-[1.08]"
@@ -29,7 +28,7 @@ export function RestaurantsGrid({ restaurants }: { restaurants: RestaurantListIt
                   />
                 </div>
 
-                {/* Badge sits outside the scaling layer so it stays put on hover */}
+               
                 {r.isOpen && (
                   <span className="absolute top-3 left-3 z-10 bg-white text-primary-dark text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
                     <Circle

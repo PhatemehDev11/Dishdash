@@ -6,6 +6,13 @@ export async function getAllRestaurants() {
   });
 }
 
+export async function getFeaturedRestaurants(limit = 3) {
+  return prisma.restaurant.findMany({
+    orderBy: { rating: "desc" },
+    take: limit,
+  });
+}
+
 export async function getRestaurantBySlug(slug: string) {
   const restaurant = await prisma.restaurant.findUnique({
     where: { slug },
