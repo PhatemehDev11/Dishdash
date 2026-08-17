@@ -1,9 +1,14 @@
+"use client";
+
 import { Search, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function NavActions() {
+  const { data: session, status } = useSession();
+
   return (
     <div className="flex items-center gap-1 sm:gap-2">
       <Button variant="ghost" size="icon" className="rounded-full">
@@ -20,11 +25,29 @@ export default function NavActions() {
         </Button>
       </Link>
 
-      <Button className="rounded-full px-4 sm:px-6">
-        <span className="hidden sm:inline">Get Started</span>
-
-        <span className="sm:hidden">Start</span>
-      </Button>
+      {status === "loading" ? null : session?.user ? (
+        <div className="flex items-center gap-2">
+          <span className="hidden sm:inline text-sm font-medium">
+            Hi, {session.user.name?.split(" ")[0]}
+          </span>
+          <Button
+            variant="ghost"
+            className="rounded-full px-4 sm:px-6  text-red-500"
+            onClick={() => signOut({ callbackUrl: "/" })}
+          >
+            Sign Out
+          </Button>
+        </div>
+      ) : (
+        <Button
+          className="rounded-full px-4 sm:px-6"
+          render={<Link href="/login" />}
+          nativeButton={false}
+        >
+          <span className="hidden sm:inline">Get Started</span>
+          <span className="sm:hidden">Start</span>
+        </Button>
+      )}
     </div>
   );
 }
