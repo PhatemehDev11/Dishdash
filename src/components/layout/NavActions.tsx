@@ -1,19 +1,30 @@
 "use client";
 
-import { Search, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { Search, ShoppingCart, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
+import { SearchModal } from "@/features/search/SearchModal";
 
 export default function NavActions() {
   const { data: session, status } = useSession();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
     <div className="flex items-center gap-1 sm:gap-2">
-      <Button variant="ghost" size="icon" className="rounded-full">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="rounded-full"
+        aria-label="Search"
+        onClick={() => setSearchOpen(true)}
+      >
         <Search className="h-4 w-4 sm:h-5 sm:w-5" />
       </Button>
+
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       <Link
         href="/cart"
@@ -26,16 +37,22 @@ export default function NavActions() {
       </Link>
 
       {status === "loading" ? null : session?.user ? (
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:inline text-sm font-medium">
-            Hi, {session.user.name?.split(" ")[0]}
-          </span>
+        <div className="flex items-center gap-2 pl-1">
+          <div
+            className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold"
+            title={session.user.name ?? ""}
+          >
+            {session.user.name?.charAt(0).toUpperCase()}
+          </div>
           <Button
             variant="ghost"
-            className="rounded-full px-4 sm:px-6  text-red-500"
+            size="icon"
+            className="rounded-full"
+            aria-label="Sign out"
+            title="Sign out"
             onClick={() => signOut({ callbackUrl: "/" })}
           >
-            Sign Out
+            <LogOut className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       ) : (
