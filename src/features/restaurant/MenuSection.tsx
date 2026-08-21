@@ -2,13 +2,14 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, Plus } from "lucide-react";
+import { Heart, Plus, Check } from "lucide-react";
 import type { RestaurantWithMenu, MenuFoodItem } from "@/lib/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
+import { useCart } from "@/features/Cart/useCart";
 import Link from "next/link";
 
-export function MenuSection({ restaurant }: { restaurant:RestaurantWithMenu }) {
+export function MenuSection({ restaurant }: { restaurant: RestaurantWithMenu }) {
   const [activeCategory, setActiveCategory] = useState(restaurant.categories[0]);
 
   const filteredMenu =
@@ -36,7 +37,7 @@ export function MenuSection({ restaurant }: { restaurant:RestaurantWithMenu }) {
             </button>
           ))}
         </div>
-ِ
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5.5">
           {filteredMenu.map((item, i) => (
             <Reveal key={item.id} delay={Math.min(i * 0.05, 0.3)}>
@@ -46,7 +47,9 @@ export function MenuSection({ restaurant }: { restaurant:RestaurantWithMenu }) {
         </div>
 
         {filteredMenu.length === 0 && (
-          <p className="text-muted-foreground text-sm text-center py-10">No items in this category yet.</p>
+          <p className="text-muted-foreground text-sm text-center py-10">
+            No items in this category yet.
+          </p>
         )}
       </div>
     </section>
@@ -55,11 +58,23 @@ export function MenuSection({ restaurant }: { restaurant:RestaurantWithMenu }) {
 
 function MenuCard({ item }: { item: MenuFoodItem }) {
   const [liked, setLiked] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
+  const { addItem } = useCart();
   const Icon = getFoodIcon(item.icon);
 
+  async function handleAdd(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    await addItem(item.id, 1);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1200);
+  }
+
   return (
-   
-    <Link href={`/food/${item.id}`} className="group bg-white rounded-3xl border border-[#EEF0F2] overflow-hidden flex gap-0 transition-all duration-300 hover:shadow-[0_12px_32px_rgba(17,24,39,0.08)] hover:-translate-y-1">
+    <Link
+      href={`/food/${item.id}`}
+      className="group bg-white rounded-3xl border border-[#EEF0F2] overflow-hidden flex gap-0 transition-all duration-300 hover:shadow-[0_12px_32px_rgba(17,24,39,0.08)] hover:-translate-y-1"
+    >
       <div
         className="relative w-[110px] flex-none flex items-center justify-center"
         style={{ background: `linear-gradient(150deg, ${item.gradientFrom}, ${item.gradientTo})` }}
@@ -67,7 +82,10 @@ function MenuCard({ item }: { item: MenuFoodItem }) {
         <Icon className="w-9 h-9 text-secondary/70" strokeWidth={1.3} />
         <button
           aria-label="Save to favorites"
-          onClick={() => setLiked((v) => !v)}
+          onClick={(e) => {
+            e.preventDefault();
+            setLiked((v) => !v);
+          }}
           className="absolute top-2 right-2 w-[26px] h-[26px] rounded-full bg-white/85 flex items-center justify-center"
         >
           <Heart
@@ -89,10 +107,23 @@ function MenuCard({ item }: { item: MenuFoodItem }) {
           </span>
           <button
             aria-label="Add to cart"
-            className="bg-secondary text-white w-[28px] h-[28px] rounded-full transition-all duration-300 group-hover:w-[76px] group-hover:rounded-2xl overflow-hidden flex items-center justify-center flex-none"
+            onClick={handleAdd}
+            className={`text-white w-[28px] h-[28px] rounded-full transition-all duration-300 overflow-hidden flex items-center justify-center flex-none ${
+              justAdded
+                ? "!w-[76px] !rounded-2xl bg-primary"
+                : "group-hover:w-[76px] group-hover:rounded-2xl bg-secondary"
+            }`}
           >
-            <Plus className="w-3.5 h-3.5 group-hover:hidden" strokeWidth={2.5} />
-            <span className="hidden group-hover:inline text-[11px] font-semibold">Add</span>
+            {justAdded ? (
+              <span className="flex items-center gap-1 text-[11px] font-semibold">
+                <Check className="w-3 h-3" strokeWidth={3} /> Added
+              </span>
+            ) : (
+              <>
+                <Plus className="w-3.5 h-3.5 group-hover:hidden" strokeWidth={2.5} />
+                <span className="hidden group-hover:inline text-[11px] font-semibold">Add</span>
+              </>
+            )}
           </button>
         </div>
       </div>
