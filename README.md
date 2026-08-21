@@ -8,4 +8,5 @@ A modern full-stack food ordering platform built with:
 • Tailwind CSS
 • shadcn/ui
 • Prisma
+• Supabase
 • PostgreSQL

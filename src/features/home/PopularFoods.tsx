@@ -1,10 +1,12 @@
-import { POPULAR_DISHES } from "@/lib/constants/home";
+import { getPopularFood } from "@/lib/food";
 import DishCard from "./DishCard";
 import { SectionHead } from "@/components/shared/SectionHead";
 
-export default function PopularFoods() {
+export default async function PopularFoods() {
+  const dishes = await getPopularFood(4);
+
   return (
-    <section className="py-20">
+    <section id="popular-dishes" className="py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
           eyebrow="Popular"
@@ -12,22 +14,32 @@ export default function PopularFoods() {
           description="  Crowd favorites, picked by thousands of hungry customers this week."
         />
 
+
+
         <div
           className=" mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide
             sm:grid sm:grid-cols-2 sm:overflow-visible
             lg:grid-cols-4
           "
           >
-          {POPULAR_DISHES.map((dish) => (
+          {dishes.map((dish) => (
             <div
-              key={dish.name}
+              key={dish.id}
               className="
                 min-w-[280px]
                 snap-start
                 sm:min-w-0
               "
             >
-              <DishCard {...dish} />
+              <DishCard
+                id={dish.id}
+                name={dish.name}
+                category={dish.category}
+                price={dish.price}
+                icon={dish.icon}
+                gradientFrom={dish.gradientFrom}
+                gradientTo={dish.gradientTo}
+              />
             </div>
           ))}
         </div>

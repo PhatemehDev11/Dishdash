@@ -4,39 +4,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Star, Minus, Plus, ChevronLeft } from "lucide-react";
-import type { MenuItem, RestaurantDetail } from "@/types/restaurant";
+import type { FoodItem, FoodRestaurant } from "@/lib/food";
 import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { getFoodIcon } from "@/lib/icons";
-import { useCartStore } from "@/lib/store/Cart";
+import { useCart } from "@/features/Cart/useCart";
 
 export function FoodDetails({
   item,
   restaurant,
 }: {
-  item: MenuItem;
-  restaurant: RestaurantDetail;
+  item: FoodItem;
+  restaurant: FoodRestaurant;
 }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  const addItem = useCartStore((s) => s.addItem);
+  const { addItem } = useCart();
 
   const Icon = getFoodIcon(item.icon);
 
-  function handleAddToCart() {
-    addItem(
-      {
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        icon: item.icon,
-        gradientFrom: item.gradientFrom,
-        gradientTo: item.gradientTo,
-        restaurantSlug: restaurant.slug,
-        restaurantName: restaurant.name,
-      },
-      quantity
-    );
+  async function handleAddToCart() {
+    await addItem(item.id, quantity);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   }
@@ -79,18 +67,14 @@ export function FoodDetails({
                   <Star
                     key={i}
                     className={`w-4 h-4 ${
-                      i < Math.round(item.rating)
-                        ? "fill-accent text-accent"
-                        : "text-[#E5E7EB]"
+                      i < Math.round(item.rating) ? "fill-accent text-accent" : "text-[#E5E7EB]"
                     }`}
                     strokeWidth={0}
                   />
                 ))}
               </div>
               <b className="text-[14.5px]">{item.rating}</b>
-              <span className="text-muted-foreground text-sm">
-                ({item.reviewCount} reviews)
-              </span>
+              <span className="text-muted-foreground text-sm">({item.reviewCount} reviews)</span>
             </div>
 
             <p className="text-muted-foreground text-[15px] leading-[1.7] mb-5 max-w-[48ch]">
@@ -137,9 +121,7 @@ export function FoodDetails({
                   >
                     <Minus className="w-4 h-4" strokeWidth={2.5} />
                   </button>
-                  <span className="w-5 text-center font-semibold text-[14.5px]">
-                    {quantity}
-                  </span>
+                  <span className="w-5 text-center font-semibold text-[14.5px]">{quantity}</span>
                   <button
                     aria-label="Increase quantity"
                     onClick={() => setQuantity((q) => q + 1)}

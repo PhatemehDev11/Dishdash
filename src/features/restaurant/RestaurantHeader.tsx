@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/static-components */
 import { Star, Clock, MapPin, Bike, Circle } from "lucide-react";
-import type { RestaurantDetail } from "@/types/restaurant";
+import type { RestaurantWithMenu } from "@/lib/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
 
-export function RestaurantHeader({ restaurant }: { restaurant: RestaurantDetail }) {
+export function RestaurantHeader({ restaurant }: { restaurant: RestaurantWithMenu }) {
   const Icon = getFoodIcon(restaurant.icon);
 
   return (

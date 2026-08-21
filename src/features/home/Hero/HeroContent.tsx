@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FaMotorcycle } from "react-icons/fa6";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
@@ -61,6 +62,8 @@ export default function HeroContent() {
         <Button
           size="lg"
           className="rounded-full px-8 transition-all duration-300 hover:scale-105"
+          render={<Link href="/restaurants" />}
+          nativeButton={false}
         >
           Order Now
         </Button>
@@ -69,6 +72,8 @@ export default function HeroContent() {
           variant="outline"
           size="lg"
           className="rounded-full px-8 transition-all duration-300 hover:scale-105"
+          render={<a href="#popular-dishes" />}
+          nativeButton={false}
         >
           View Menu
         </Button>

@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { Star, Clock, MapPin, Bike, Circle } from "lucide-react";
-import { restaurantDetails } from "@/lib/constants/restaurant";
 import { getFoodIcon } from "@/lib/icons";
 import { Reveal } from "@/components/shared/Reveal";
+import type { RestaurantListItem } from "@/lib/restaurant";
 
-export function RestaurantsGrid() {
-  const list = Object.values(restaurantDetails);
-
+export function RestaurantsGrid({ restaurants }: { restaurants: RestaurantListItem[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {list.map((r, i) => {
+      {restaurants.map((r, i) => {
         const Icon = getFoodIcon(r.icon);
         return (
           <Reveal key={r.slug} delay={i * 0.08}>
@@ -17,18 +15,22 @@ export function RestaurantsGrid() {
               href={`/restaurants/${r.slug}`}
               className="group block bg-white rounded-3xl overflow-hidden border border-[#EEF0F2] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(17,24,39,0.14)]"
             >
-              <div
-                className="relative h-[170px] flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-[1.08]"
-                style={{
-                  background: `linear-gradient(140deg, ${r.coverFrom}, ${r.coverTo})`,
-                }}
-              >
-                <Icon
-                  className="w-16 h-16 text-secondary/70"
-                  strokeWidth={1.2}
-                />
+              <div className="relative h-[170px] overflow-hidden">
+                <div
+                  className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-[1.08]"
+                  style={{
+                    background: `linear-gradient(140deg, ${r.coverFrom}, ${r.coverTo})`,
+                  }}
+                >
+                  <Icon
+                    className="w-16 h-16 text-secondary/70"
+                    strokeWidth={1.2}
+                  />
+                </div>
+
+               
                 {r.isOpen && (
-                  <span className="absolute top-3 left-3 bg-white text-primary-dark text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span className="absolute top-3 left-3 z-10 bg-white text-primary-dark text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
                     <Circle
                       className="w-2 h-2 fill-primary text-primary"
                       strokeWidth={0}
