@@ -30,7 +30,7 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   const [loading, setLoading] = useState(false);
   const [restaurants, setRestaurants] = useState<RestaurantResult[]>([]);
   const [food, setFood] = useState<FoodResult[]>([]);
-
+ 
   useEffect(() => {
     if (!query.trim()) {
       return;
