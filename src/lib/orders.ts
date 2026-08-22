@@ -34,7 +34,6 @@ export async function createOrder(userId: string, addressId: string) {
     include: { items: true },
   });
 
-  // Checkout clears the cart once the order is placed
   await prisma.cartItem.deleteMany({ where: { userId } });
 
   return order;
@@ -47,5 +46,14 @@ export async function getOrderById(userId: string, orderId: string) {
       items: true,
       address: true,
     },
+  });
+}
+
+/** All of a user's past orders, most recent first, for the profile page. */
+export async function getUserOrders(userId: string) {
+  return prisma.order.findMany({
+    where: { userId },
+    include: { items: true },
+    orderBy: { createdAt: "desc" },
   });
 }

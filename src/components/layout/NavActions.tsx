@@ -41,12 +41,14 @@ export default function NavActions() {
 
       {status === "loading" ? null : session?.user ? (
         <div className="flex items-center gap-2 pl-1">
-          <div
-            className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold"
+          <Link
+            href="/profile"
+            aria-label="Your profile"
             title={session.user.name ?? ""}
+            className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-opacity"
           >
             {session.user.name?.charAt(0).toUpperCase()}
-          </div>
+          </Link>
           <Button
             variant="ghost"
             size="icon"
