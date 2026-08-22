@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Package, ChevronRight } from "lucide-react";
-import  Navbar  from "@/components/layout/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { auth } from "@/lib/auth";
 import { getUserOrders } from "@/lib/orders";
@@ -10,7 +10,10 @@ const STATUS_LABELS: Record<string, { label: string; className: string }> = {
   PENDING: { label: "Pending", className: "bg-yellow-100 text-yellow-800" },
   CONFIRMED: { label: "Confirmed", className: "bg-blue-100 text-blue-800" },
   PREPARING: { label: "Preparing", className: "bg-blue-100 text-blue-800" },
-  ON_THE_WAY: { label: "On the way", className: "bg-purple-100 text-purple-800" },
+  ON_THE_WAY: {
+    label: "On the way",
+    className: "bg-purple-100 text-purple-800",
+  },
   DELIVERED: { label: "Delivered", className: "bg-green-100 text-green-800" },
   CANCELLED: { label: "Cancelled", className: "bg-red-100 text-red-800" },
 };
@@ -36,9 +39,18 @@ export default async function ProfilePage() {
             </div>
             <div>
               <h1 className="text-xl font-extrabold">{session.user.name}</h1>
-              <p className="text-muted-foreground text-sm">{session.user.email}</p>
+              <p className="text-muted-foreground text-sm">
+                {session.user.email}
+              </p>
             </div>
           </div>
+
+          <Link
+            href="/profile/edit"
+            className="text-sm font-semibold text-primary hover:underline mb-6 inline-block"
+          >
+            Edit Profile
+          </Link>
 
           <h2 className="text-lg font-bold mb-4">Order History</h2>
 
@@ -50,14 +62,18 @@ export default async function ProfilePage() {
               <p className="text-muted-foreground text-sm mb-5">
                 You haven&apos;t placed any orders yet.
               </p>
-              <Link href="/restaurants" className="text-primary font-semibold text-sm hover:underline">
+              <Link
+                href="/restaurants"
+                className="text-primary font-semibold text-sm hover:underline"
+              >
                 Browse Restaurants
               </Link>
             </div>
           ) : (
             <div className="space-y-3">
               {orders.map((order) => {
-                const status = STATUS_LABELS[order.status] ?? STATUS_LABELS.PENDING;
+                const status =
+                  STATUS_LABELS[order.status] ?? STATUS_LABELS.PENDING;
                 return (
                   <Link
                     key={order.id}
@@ -76,7 +92,8 @@ export default async function ProfilePage() {
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {order.items.length} item{order.items.length !== 1 ? "s" : ""} ·{" "}
+                        {order.items.length} item
+                        {order.items.length !== 1 ? "s" : ""} ·{" "}
                         {new Date(order.createdAt).toLocaleDateString()}
                       </p>
                     </div>

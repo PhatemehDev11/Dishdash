@@ -24,3 +24,14 @@ export async function createAddress(
     },
   });
 }
+
+export async function deleteAddress(userId: string, addressId: string) {
+  return prisma.address.deleteMany({ where: { id: addressId, userId } });
+}
+
+export async function setDefaultAddress(userId: string, addressId: string) {
+  await prisma.$transaction([
+    prisma.address.updateMany({ where: { userId }, data: { isDefault: false } }),
+    prisma.address.updateMany({ where: { id: addressId, userId }, data: { isDefault: true } }),
+  ]);
+}

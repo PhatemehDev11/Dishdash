@@ -60,5 +60,19 @@ export function useAddresses() {
     return result.address as AddressItem;
   }
 
-  return { addresses, loading, addAddress };
+  async function deleteAddress(id: string) {
+    await fetch(`/api/addresses/${id}`, { method: "DELETE" });
+    await refetch();
+  }
+
+  async function setDefault(id: string) {
+    await fetch(`/api/addresses/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ isDefault: true }),
+    });
+    await refetch();
+  }
+
+  return { addresses, loading, addAddress, deleteAddress, setDefault };
 }
