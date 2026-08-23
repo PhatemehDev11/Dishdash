@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Package, ChevronRight } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
+import { Package, ChevronRight, Pencil } from "lucide-react";
+import  Navbar  from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { getUserOrders } from "@/lib/orders";
 
@@ -10,10 +11,7 @@ const STATUS_LABELS: Record<string, { label: string; className: string }> = {
   PENDING: { label: "Pending", className: "bg-yellow-100 text-yellow-800" },
   CONFIRMED: { label: "Confirmed", className: "bg-blue-100 text-blue-800" },
   PREPARING: { label: "Preparing", className: "bg-blue-100 text-blue-800" },
-  ON_THE_WAY: {
-    label: "On the way",
-    className: "bg-purple-100 text-purple-800",
-  },
+  ON_THE_WAY: { label: "On the way", className: "bg-purple-100 text-purple-800" },
   DELIVERED: { label: "Delivered", className: "bg-green-100 text-green-800" },
   CANCELLED: { label: "Cancelled", className: "bg-red-100 text-red-800" },
 };
@@ -33,24 +31,27 @@ export default async function ProfilePage() {
       <Navbar />
       <main className="pt-[150px] pb-20 min-h-[70vh]">
         <div className="max-w-[700px] mx-auto px-8">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold flex-none">
-              {session.user.name?.charAt(0).toUpperCase()}
+          <div className="flex items-center justify-between gap-4 mb-10 flex-wrap">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold flex-none">
+                {session.user.name?.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <h1 className="text-xl font-extrabold">{session.user.name}</h1>
+                <p className="text-muted-foreground text-sm">{session.user.email}</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-extrabold">{session.user.name}</h1>
-              <p className="text-muted-foreground text-sm">
-                {session.user.email}
-              </p>
-            </div>
-          </div>
 
-          <Link
-            href="/profile/edit"
-            className="text-sm font-semibold text-primary hover:underline mb-6 inline-block"
-          >
-            Edit Profile
-          </Link>
+            <Button
+              variant="outline"
+              render={<Link href="/profile/edit" />}
+              nativeButton={false}
+              className="rounded-full gap-1.5"
+            >
+              <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
+              Edit Profile
+            </Button>
+          </div>
 
           <h2 className="text-lg font-bold mb-4">Order History</h2>
 
@@ -62,18 +63,14 @@ export default async function ProfilePage() {
               <p className="text-muted-foreground text-sm mb-5">
                 You haven&apos;t placed any orders yet.
               </p>
-              <Link
-                href="/restaurants"
-                className="text-primary font-semibold text-sm hover:underline"
-              >
+              <Link href="/restaurants" className="text-primary font-semibold text-sm hover:underline">
                 Browse Restaurants
               </Link>
             </div>
           ) : (
             <div className="space-y-3">
               {orders.map((order) => {
-                const status =
-                  STATUS_LABELS[order.status] ?? STATUS_LABELS.PENDING;
+                const status = STATUS_LABELS[order.status] ?? STATUS_LABELS.PENDING;
                 return (
                   <Link
                     key={order.id}
@@ -92,8 +89,7 @@ export default async function ProfilePage() {
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {order.items.length} item
-                        {order.items.length !== 1 ? "s" : ""} ·{" "}
+                        {order.items.length} item{order.items.length !== 1 ? "s" : ""} ·{" "}
                         {new Date(order.createdAt).toLocaleDateString()}
                       </p>
                     </div>
