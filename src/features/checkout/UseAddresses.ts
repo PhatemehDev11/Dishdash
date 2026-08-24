@@ -60,9 +60,17 @@ export function useAddresses() {
     return result.address as AddressItem;
   }
 
-  async function deleteAddress(id: string) {
-    await fetch(`/api/addresses/${id}`, { method: "DELETE" });
+
+  async function deleteAddress(id: string): Promise<string | null> {
+    const res = await fetch(`/api/addresses/${id}`, { method: "DELETE" });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      return data?.error ?? "Could not delete address.";
+    }
+
     await refetch();
+    return null;
   }
 
   async function setDefault(id: string) {

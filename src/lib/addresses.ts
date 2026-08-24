@@ -26,6 +26,12 @@ export async function createAddress(
 }
 
 export async function deleteAddress(userId: string, addressId: string) {
+  const orderCount = await prisma.order.count({ where: { addressId, userId } });
+
+  if (orderCount > 0) {
+    throw new Error("This address is used in a past order and can't be deleted.");
+  }
+
   return prisma.address.deleteMany({ where: { id: addressId, userId } });
 }
 

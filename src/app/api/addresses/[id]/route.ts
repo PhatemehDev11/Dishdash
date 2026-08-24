@@ -12,8 +12,13 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
   const { id } = await params;
   const userId = (session.user as { id: string }).id;
 
-  await deleteAddress(userId, id);
-  return NextResponse.json({ ok: true });
+  try {
+    await deleteAddress(userId, id);
+    return NextResponse.json({ ok: true });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Could not delete address.";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {

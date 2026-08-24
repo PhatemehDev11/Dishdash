@@ -26,6 +26,8 @@ export default function EditProfilePage() {
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState("");
 
+  const [addressError, setAddressError] = useState("");
+
   async function handleNameSave(e: FormEvent) {
     e.preventDefault();
     setNameSaving(true);
@@ -78,6 +80,14 @@ export default function EditProfilePage() {
 
     setPasswordSuccess("Password updated!");
     setPasswordForm({ currentPassword: "", newPassword: "", confirm: "" });
+  }
+
+  async function handleDeleteAddress(id: string) {
+    setAddressError("");
+    const error = await deleteAddress(id);
+    if (error) {
+      setAddressError(error);
+    }
   }
 
   return (
@@ -149,6 +159,13 @@ export default function EditProfilePage() {
 
           <section>
             <h2 className="font-bold mb-4">Your Addresses</h2>
+
+            {addressError && (
+              <p className="text-destructive text-sm mb-3 bg-destructive/10 rounded-xl px-3 py-2">
+                {addressError}
+              </p>
+            )}
+
             {addressesLoading ? (
               <p className="text-sm text-muted-foreground">Loading...</p>
             ) : addresses.length === 0 ? (
@@ -188,7 +205,7 @@ export default function EditProfilePage() {
                       <button
                         type="button"
                         aria-label="Delete address"
-                        onClick={() => deleteAddress(addr.id)}
+                        onClick={() => handleDeleteAddress(addr.id)}
                         className="text-muted-foreground hover:text-destructive"
                       >
                         <Trash2 className="w-4 h-4" strokeWidth={2} />
