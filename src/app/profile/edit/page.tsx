@@ -4,14 +4,19 @@ import { useState, type FormEvent } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Trash2, Star, ChevronLeft } from "lucide-react";
-import  Navbar  from "@/components/layout/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { useAddresses } from "@/features/checkout/UseAddresses";
+import { useAddresses } from "@/features/checkout/useAddresses";
 
 export default function EditProfilePage() {
   const { data: session, update } = useSession();
-  const { addresses, loading: addressesLoading, deleteAddress, setDefault } = useAddresses();
+  const {
+    addresses,
+    loading: addressesLoading,
+    deleteAddress,
+    setDefault,
+  } = useAddresses();
 
   const [name, setName] = useState(session?.user?.name ?? "");
   const [nameSaving, setNameSaving] = useState(false);
@@ -116,7 +121,11 @@ export default function EditProfilePage() {
                 {nameSaving ? "Saving..." : "Save"}
               </Button>
             </form>
-            {nameMessage && <p className="text-sm text-muted-foreground mt-2">{nameMessage}</p>}
+            {nameMessage && (
+              <p className="text-sm text-muted-foreground mt-2">
+                {nameMessage}
+              </p>
+            )}
           </section>
 
           <section className="mb-10">
@@ -127,7 +136,10 @@ export default function EditProfilePage() {
                 placeholder="Current password"
                 value={passwordForm.currentPassword}
                 onChange={(e) =>
-                  setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
+                  setPasswordForm({
+                    ...passwordForm,
+                    currentPassword: e.target.value,
+                  })
                 }
                 required
                 className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-primary"
@@ -136,7 +148,12 @@ export default function EditProfilePage() {
                 type="password"
                 placeholder="New password"
                 value={passwordForm.newPassword}
-                onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                onChange={(e) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    newPassword: e.target.value,
+                  })
+                }
                 required
                 minLength={6}
                 className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-primary"
@@ -145,12 +162,18 @@ export default function EditProfilePage() {
                 type="password"
                 placeholder="Confirm new password"
                 value={passwordForm.confirm}
-                onChange={(e) => setPasswordForm({ ...passwordForm, confirm: e.target.value })}
+                onChange={(e) =>
+                  setPasswordForm({ ...passwordForm, confirm: e.target.value })
+                }
                 required
                 className="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-primary"
               />
-              {passwordError && <p className="text-destructive text-sm">{passwordError}</p>}
-              {passwordSuccess && <p className="text-primary text-sm">{passwordSuccess}</p>}
+              {passwordError && (
+                <p className="text-destructive text-sm">{passwordError}</p>
+              )}
+              {passwordSuccess && (
+                <p className="text-primary text-sm">{passwordSuccess}</p>
+              )}
               <Button type="submit" disabled={passwordSaving}>
                 {passwordSaving ? "Saving..." : "Update Password"}
               </Button>
@@ -181,10 +204,16 @@ export default function EditProfilePage() {
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-sm">{addr.label}</span>
+                        <span className="font-semibold text-sm">
+                          {addr.label}
+                        </span>
                         {addr.isDefault && (
                           <span className="text-[10px] font-bold text-primary flex items-center gap-1">
-                            <Star className="w-3 h-3 fill-primary" strokeWidth={0} /> Default
+                            <Star
+                              className="w-3 h-3 fill-primary"
+                              strokeWidth={0}
+                            />{" "}
+                            Default
                           </span>
                         )}
                       </div>
