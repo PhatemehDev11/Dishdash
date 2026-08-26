@@ -1,15 +1,22 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { getFavoriteFoodIds, toggleFavorite } from "@/lib/favorites";
+import { getFavoriteFoodIds, getUserFavorites, toggleFavorite } from "@/lib/favorites";
 
-export async function GET() {
+export async function GET(req: Request) {
   const session = await auth();
 
   if (!session?.user) {
-    return NextResponse.json({ foodIds: [] });
+    return NextResponse.json({ foodIds: [], items: [] });
   }
 
   const userId = (session.user as { id: string }).id;
+  const { searchParams } = new URL(req.url);
+
+  if (searchParams.get("full") === "true") {
+    const items = await getUserFavorites(userId);
+    return NextResponse.json({ items });
+  }
+
   const foodIds = await getFavoriteFoodIds(userId);
   return NextResponse.json({ foodIds });
 }
