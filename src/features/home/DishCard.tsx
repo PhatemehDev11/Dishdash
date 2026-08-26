@@ -4,6 +4,8 @@
 import Link from "next/link";
 import { Heart, Plus } from "lucide-react";
 import { getFoodIcon } from "@/lib/icons";
+import { useCart } from "@/features/Cart/useCart";
+import { useFavorites } from "@/features/favorites/useFavorites";
 
 type DishCardProps = {
   id: string;
@@ -25,6 +27,9 @@ export default function DishCard({
   gradientTo,
 }: DishCardProps) {
   const Icon = getFoodIcon(icon);
+  const { addItem } = useCart();
+  const { isFavorited, toggleFavorite } = useFavorites();
+  const liked = isFavorited(id);
 
   return (
     <Link
@@ -39,18 +44,19 @@ export default function DishCard({
           type="button"
           className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110"
           aria-label={`Add ${name} to favorites`}
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(id);
+          }}
         >
-          <Heart className="h-4 w-4 text-slate-300" />
+          <Heart className={`h-4 w-4 ${liked ? "fill-destructive text-destructive" : "text-slate-300"}`} />
         </button>
 
         <Icon className="h-16 w-16 text-foreground/60" strokeWidth={1.3} />
       </div>
 
       <div className="p-5">
-        <p className="text-xs font-semibold tracking-wider text-muted-foreground">
-          {category}
-        </p>
+        <p className="text-xs font-semibold tracking-wider text-muted-foreground">{category}</p>
 
         <h3 className="mt-2 text-base font-bold">{name}</h3>
 
@@ -61,7 +67,10 @@ export default function DishCard({
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:scale-110"
             aria-label={`Add ${name} to cart`}
-            onClick={(e) => e.preventDefault()}
+            onClick={(e) => {
+              e.preventDefault();
+              addItem(id, 1);
+            }}
           >
             <Plus className="h-4 w-4" />
           </button>

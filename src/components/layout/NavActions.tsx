@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, LogOut } from "lucide-react";
+import { Search, ShoppingCart, LogOut, Heart } from "lucide-react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
@@ -27,6 +27,14 @@ export default function NavActions() {
       </Button>
 
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {status === "authenticated" && (
+        <Link href="/favorites" aria-label="Favorites" className="hidden sm:block">
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+          </Button>
+        </Link>
+      )}
 
       <Link href="/cart" aria-label="Cart" className="relative">
         <Button variant="ghost" size="icon" className="rounded-full">

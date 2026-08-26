@@ -7,6 +7,7 @@ import type { RestaurantWithMenu, MenuFoodItem } from "@/lib/restaurant";
 import { Reveal } from "@/components/shared/Reveal";
 import { getFoodIcon } from "@/lib/icons";
 import { useCart } from "@/features/Cart/useCart";
+import { useFavorites } from "@/features/favorites/useFavorites";
 import Link from "next/link";
 
 export function MenuSection({ restaurant }: { restaurant: RestaurantWithMenu }) {
@@ -57,9 +58,10 @@ export function MenuSection({ restaurant }: { restaurant: RestaurantWithMenu }) 
 }
 
 function MenuCard({ item }: { item: MenuFoodItem }) {
-  const [liked, setLiked] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
   const { addItem } = useCart();
+  const { isFavorited, toggleFavorite } = useFavorites();
+  const liked = isFavorited(item.id);
   const Icon = getFoodIcon(item.icon);
 
   async function handleAdd(e: React.MouseEvent) {
@@ -68,6 +70,12 @@ function MenuCard({ item }: { item: MenuFoodItem }) {
     await addItem(item.id, 1);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1200);
+  }
+
+  function handleToggleFavorite(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(item.id);
   }
 
   return (
@@ -82,10 +90,7 @@ function MenuCard({ item }: { item: MenuFoodItem }) {
         <Icon className="w-9 h-9 text-secondary/70" strokeWidth={1.3} />
         <button
           aria-label="Save to favorites"
-          onClick={(e) => {
-            e.preventDefault();
-            setLiked((v) => !v);
-          }}
+          onClick={handleToggleFavorite}
           className="absolute top-2 right-2 w-[26px] h-[26px] rounded-full bg-white/85 flex items-center justify-center"
         >
           <Heart
